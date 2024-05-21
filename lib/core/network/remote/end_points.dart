@@ -8,4 +8,10 @@ class EndPoints {
   static String getTweetsSample = '/deploy/high';
   static String getNegativeWordsImages = '/deploy/get-image/negative';
   static String getPositveWordsImages = '/deploy/get-image/positive';
+    static String getFreeDataPercentage = '/free/preces';
+  static String getFreeDataPlotingTable = '/free/plot';
+  static String getFreeTweetsSample = '/free/high';
+  static String getFreeNegativeWordsImages = '/free/get-image/negative';
+  static String getFreePositveWordsImages = '/free/get-image/positive';
+  static String createSub = '/user/create-subscription';
 }

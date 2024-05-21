@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_analyzer/core/constant/app_constance.dart';
 import 'package:the_analyzer/core/utils/colors/app_colors.dart';
 import 'package:the_analyzer/core/utils/styles/my_text.dart';
 import 'package:the_analyzer/core/widget/my_elevated_button.dart';
@@ -44,7 +45,7 @@ class SubscriptionPlanScreen extends StatelessWidget {
   }
 }
 
-class PlanCard extends StatelessWidget {
+class PlanCard extends StatefulWidget {
   final String planName;
   final String price;
   final List<String> features;
@@ -58,6 +59,11 @@ class PlanCard extends StatelessWidget {
   });
 
   @override
+  State<PlanCard> createState() => _PlanCardState();
+}
+
+class _PlanCardState extends State<PlanCard> {
+  @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -70,20 +76,20 @@ class PlanCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             MyText(
-                title: planName,
+                title: widget.planName,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: isPremium ? AppColors.baseColor : AppColors.black),
+                color: widget.isPremium ? AppColors.baseColor : AppColors.black),
             const SizedBox(height: 10),
-            MyText(title: price, fontSize: 20, color: AppColors.gray),
+            MyText(title: widget.price, fontSize: 20, color: AppColors.gray),
             const SizedBox(height: 10),
-            ...features.map((feature) => Padding(
+            ...widget.features.map((feature) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Row(
                     children: [
                       Icon(
                         Icons.check,
-                        color: isPremium
+                        color: widget.isPremium
                             ? AppColors.baseColor
                             : AppColors.navyBlue,
                       ),
@@ -98,11 +104,16 @@ class PlanCard extends StatelessWidget {
                   ),
                 )),
             const SizedBox(height: 20),
-            isPremium
+            widget.isPremium
                 ? Center(
                     child: MyElevatedButton(
                     title: 'Subscribe',
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                         AppConstance.isVIP = true    ;
+                      });
+                    // GoRouter.of(context).pop() ;
+                    },
                   ))
                 : const SizedBox(),
           ],

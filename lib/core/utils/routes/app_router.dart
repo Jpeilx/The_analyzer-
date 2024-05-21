@@ -8,13 +8,15 @@ import 'package:the_analyzer/features/auth/views/otp_screen.dart';
 import 'package:the_analyzer/features/auth/views/reset_password_screen.dart';
 import 'package:the_analyzer/features/auth/views/sign_up_by_email_screen.dart';
 import 'package:the_analyzer/features/auth/views/success_screen.dart';
-import 'package:the_analyzer/features/on_boarding/views/on_boarding_screen.dart';
-import 'package:the_analyzer/features/search/data/repository/search_results_repo.dart';
-import 'package:the_analyzer/features/search/logic/search_cubit/search_cubit.dart';
-import 'package:the_analyzer/features/search/logic/search_result_cubit/search_result_cubit.dart';
-import 'package:the_analyzer/features/search/views/search_result_screen.dart';
-import 'package:the_analyzer/features/search/views/search_screen.dart';
-import 'package:the_analyzer/features/search/views/subscribtion_plan_screen.dart';
+import 'package:the_analyzer/features/search_free/data/repository/search_results_repo.dart';
+import 'package:the_analyzer/features/search_free/logic/free_search_result_cubit/search_result_cubit.dart';
+import 'package:the_analyzer/features/search_free/views/free_search_result_screen.dart';
+import 'package:the_analyzer/features/search_vip/data/repository/search_results_repo.dart';
+import 'package:the_analyzer/features/search_vip/logic/search_cubit/search_cubit.dart';
+import 'package:the_analyzer/features/search_vip/logic/search_result_cubit/search_result_cubit.dart';
+import 'package:the_analyzer/features/search_vip/views/search_result_screen.dart';
+import 'package:the_analyzer/features/search_vip/views/search_screen.dart';
+import 'package:the_analyzer/features/subscribtion/views/subscribtion_plan_screen.dart';
 
 abstract class AppRouter {
   static const String kOtpView = '/OtpView';
@@ -27,23 +29,23 @@ abstract class AppRouter {
   static const String kSearchView = '/SearchView';
   static const String kSearchResultView = '/SearchResultView';
   static const String kSubscribtionView = '/SubscribtionView';
+  static const String kFreeSearchVeiw = '/FreeSearchVeiw';
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return BlocProvider(
-            create: (context) => SearchCubit(getIt.get<SearchRepo>()),
-            child: BlocProvider(
-            create: (context) => SearchResultCubit(getIt.get<SearchRepo>())
-              ..getPercetageData()
-              ..getPlotingTableData()
-              ..getTweetsSampleData()
-              ..getNegativeWordsImage()
-              ..getPositiveWordsImage(),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                  create: (context) =>
+                      SearchResultCubit(getIt.get<SearchRepo>())),
+              BlocProvider(
+                create: (context) => SearchCubit(getIt.get<SearchRepo>()),
+              ),
+            ],
             child: const SearchScreen(),
-          ),
           );
         },
       ),
@@ -96,26 +98,69 @@ abstract class AppRouter {
       GoRoute(
         path: kSearchView,
         builder: (BuildContext context, GoRouterState state) {
-          return const SearchScreen();
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                  create: (context) =>
+                      SearchResultCubit(getIt.get<SearchRepo>())),
+              BlocProvider(
+                create: (context) => SearchCubit(getIt.get<SearchRepo>()),
+              ),
+            ],
+            child: const SearchScreen(),
+          );
         },
       ),
       GoRoute(
         path: kSubscribtionView,
         builder: (BuildContext context, GoRouterState state) {
-          return  SubscriptionPlanScreen();
+          return BlocProvider(
+            create: (context) => SearchCubit(getIt.get<SearchRepo>()),
+            child: SubscriptionPlanScreen(),
+          );
         },
       ),
       GoRoute(
         path: kSearchResultView,
         builder: (BuildContext context, GoRouterState state) {
-          return BlocProvider(
-            create: (context) => SearchResultCubit(getIt.get<SearchRepo>())
-              ..getPercetageData()
-              ..getPlotingTableData()
-              ..getTweetsSampleData()
-              ..getNegativeWordsImage()
-              ..getPositiveWordsImage(),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => SearchResultCubit(getIt.get<SearchRepo>())
+                  ..getPercetageData()
+                  ..getPlotingTableData()
+                  ..getTweetsSampleData()
+                  ..getNegativeWordsImage()
+                  ..getPositiveWordsImage(),
+              ),
+              BlocProvider(
+                create: (context) => SearchCubit(getIt.get<SearchRepo>()),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    FreeSearchResultCubit(getIt.get<SearchFreeRepo>()),
+              ),
+            ],
             child: const SearchResultScreen(),
+          );
+        },
+      ),
+      GoRoute(
+        path: kFreeSearchVeiw,
+        builder: (BuildContext context, GoRouterState state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    FreeSearchResultCubit(getIt.get<SearchFreeRepo>())
+                      ..getNegativeWordsImage()
+                      ..getPercetageDataFree()
+                      ..getPlotingTableDataFree()
+                      ..getPositiveWordsImage()
+                      ..getTweetsSampleDataFree(),
+              ),
+            ],
+            child: FreeFreeSearchResultScreen(),
           );
         },
       ),

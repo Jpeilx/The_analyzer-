@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_analyzer/core/network/errors/network_exceptions.dart';
-import 'package:the_analyzer/features/search/data/models/ploting_tabel_model/ploting_tabel_model.dart';
-import 'package:the_analyzer/features/search/data/models/presentage_model/presentage_model.dart';
-import 'package:the_analyzer/features/search/data/models/tweets_sample_model/tweets_sample_model.dart';
-import 'package:the_analyzer/features/search/data/repository/base_search_results_repo.dart';
+import 'package:the_analyzer/features/search_vip/data/models/ploting_tabel_model/ploting_tabel_model.dart';
+import 'package:the_analyzer/features/search_vip/data/models/presentage_model/presentage_model.dart';
+import 'package:the_analyzer/features/search_vip/data/models/tweets_sample_model/tweets_sample_model.dart';
+import 'package:the_analyzer/features/search_vip/data/repository/base_search_results_repo.dart';
 
 part 'search_result_state.dart';
 

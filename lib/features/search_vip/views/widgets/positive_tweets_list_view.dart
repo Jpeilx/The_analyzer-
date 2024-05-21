@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_analyzer/core/utils/functions/repeated_functions.dart';
 import 'package:the_analyzer/core/utils/helper/spacing.dart';
-import 'package:the_analyzer/features/search/logic/search_result_cubit/search_result_cubit.dart';
-import 'package:the_analyzer/features/search/views/widgets/tweet_widget.dart';
+import 'package:the_analyzer/features/search_vip/logic/search_result_cubit/search_result_cubit.dart';
+import 'package:the_analyzer/features/search_vip/views/widgets/tweet_widget.dart';
 
-class TweetsListView extends StatelessWidget {
-  const TweetsListView({super.key});
+class PositiveTweetsListView extends StatelessWidget {
+  const PositiveTweetsListView({super.key});
 
   @override
   Widget build(BuildContext context) {

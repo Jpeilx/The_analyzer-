@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:the_analyzer/core/utils/functions/repeated_functions.dart';
-import 'package:the_analyzer/features/search/logic/search_result_cubit/search_result_cubit.dart';
+import 'package:the_analyzer/features/search_vip/logic/search_result_cubit/search_result_cubit.dart';
 
 class LineChartWidget extends StatelessWidget {
   const LineChartWidget({super.key});

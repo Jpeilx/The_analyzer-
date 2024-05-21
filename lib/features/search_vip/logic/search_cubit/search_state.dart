@@ -12,3 +12,4 @@ class MakeSearchErrorState extends SearchStates {
 }
 
 class MakeSearchSuccessState extends SearchStates {}
+class ChangeFromVIP extends SearchStates {}
